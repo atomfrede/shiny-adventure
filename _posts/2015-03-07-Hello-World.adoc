@@ -1,0 +1,6 @@
+= Hello World
+:hp-tags: HubPress, Octopress, HTML5
+
+Der technologische Unterbau meines "Blogs" hat sich mal wieder geändert. Diesmal von http://octopress.org/[Octopress] zu http://hubpress.io/[Hubpress], was ein einfaches editieren im Browsers (Hooray for HTML5) möglich macht. 
+
+Alle alten Artikel werden im Laufe der Zeit noch hierher umgezogen!
