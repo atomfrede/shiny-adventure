@@ -1,10 +1,1 @@
-{
-  "meta": {
-    "username": "atomfrede",
-    "repositoryName": "shiny-adventure",
-    "branch": "gh-pages"
-  },
-  "theme": {
-    "name": "Casper"
-  }
-}
+{"meta":{"username":"atomfrede","repositoryName":"shiny-adventure","branch":"gh-pages"},"site":{"title":"Shiny Adventures","description":"Of a former student of Computer Science","url":"https://atomfrede.github.io/shiny-adventure"},"socialnetwork":{"email":"frederik.hahne@gmail.com","twitter":"https://twitter.com/atomfrede","googleplus":"https://plus.google.com/+FrederikHahne","github":"https://github.com/atomfrede"},"theme":{"name":"Casper","url":"https://atomfrede.github.io/shiny-adventure/themes/Casper"}}
