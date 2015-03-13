@@ -2,3 +2,5 @@
 :hp-tags: xfce
 
 Das neue XFCE 4.12 rendered per Default Schatten unterhalbt von Leisten. Was bei normalen Leisten auf dem Desktop eventuell noch Sinn macht ist bei Docks wie link:http://www.produnis.de/blog/?p=2261[Conky] oder in meinem Fall Plank leider sehr unpraktisch wie man am folgenden Screenshot sehen kann. Die Lösung ist relativ einfach, man muss nur den Haken bei "Schatten unter Leisten anzeigen" entfernen und schon ist alles wieder normal!
+
+image::http://github.com/atomfrede/shiny-adventure/images/2015-03-13-001.png[]
