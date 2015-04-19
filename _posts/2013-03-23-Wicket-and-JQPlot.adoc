@@ -1,0 +1,34 @@
+= Wicket and JQPlot
+:published_at: 2013-03-23
+:hp-tags: Wicket, JQPLot
+
+Ich bin ja ein großer Fan von http://wicket.apache.org/[Apache Wicket]. Vor kurzem musste ich kleine Graphen in einer Wicket Anwendung anzeigen. Ich habe mich dabei für http://www.jqplot.com/[JQPlot] entschieden. Es stellte sich jedoch sehr schnell heraus, das die https://github.com/wicketstuff/core/wiki/JqPlot-Plugin-Integration[vorhandene Integration] nicht merh kompatibel zu Wicket 6.x ist. 
+
+Glücklicherweise ist das ganze mit einer kleinen Anpassung des http://wicketinaction.com/2012/07/wicket-6-resource-management/[Resource Management] gelöst. 
+
+Erster Schritt war die Erstellung einer Komponente `JQPlotChart.java`, die nichts weiter macht, als die Daten des Graphen zu kapseln und das erstellte spezielle `JQPlotBehaviour.java` hinzuzufügen. Das spezielle `JQPlotBehaviour` bindet nun einfach alle benötigten Resourcen in den Header ein. Wichtig ist hierbei, dass JQuery vor JQPlot eingebunden wird, da es ansonsten (logischerweise) zu Fehlern kommt. Das ganze sieht dann so aus:
+
+[source,java]
+.JQPlotBehaviour.java
+----
+@Override
+public void renderHead(Component component, IHeaderResponse response) {
+        super.renderHead(component, response);
+        //Add Jquery explicitly, so it is added before JQPlot
+        response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
+
+        //Core JQPlot
+        response.render(JavaScriptHeaderItem.forReference(JQPLOT_JS));
+        response.render(CssHeaderItem.forReference(JQPLOT_CSS));
+        //Plot Type specific JQPlot Scripts
+        List<String> resources = JqPlotUtils.retriveJavaScriptResources(chart);
+        for (String resource : resources) {
+                response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(JQPlotBehaviour.class, resource)));
+        }
+        //Script/JSON Data String
+        String json = createJquery();
+        //Generate Plot inside DomReady Callback
+        response.render(OnDomReadyHeaderItem.forScript(json));
+}
+----
+
