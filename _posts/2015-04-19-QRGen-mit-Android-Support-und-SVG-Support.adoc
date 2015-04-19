@@ -1,0 +1,38 @@
+= QRGen mit Android Support und SVG Support
+:hp-tags: QRGen, Android, SVG, QRCode
+Vor etwas längerer Zeit habe ich bereits über https://github.com/kenglxn/QRGen[QRGen] berichtet. Mit QRGen ist sehr einfach möglich QRCodes für URLs und VCards zu erzeugen. Es fehlte allerdings https://github.com/kenglxn/QRGen/issues/2[Android] und https://github.com/kenglxn/QRGen/issues/40[SVG Support]. 
+
+Seit Version 2.0 ist es möglich auf Android QRCodes zu erzeugen. Um das ganze möglich zu machen musste die Library in drei Teile aufgeteilt werden: `core`, `javase` und `android`, damit der Android-Teil keine Abhängigkeiten zum `BufferedImage` aus dem StandardJDK hat.
+
+== Android 
+Um QRGen innerhalb eine AndroidAPP zu verwenden, muss folgende Abhängigkeit in verwendet werden:
+
+[source,groovy]
+.build.gradle
+----
+dependencies {
+    compile ("net.glxn.qrgen:android:2.0")
+}
+----
+
+Dann stehen alle Methoden zur Verfügung, welche QRGen anbietet. Als Bonus ist es möglich direkt ein Android `Bitmap` zu erzeugen ohne das ganze zunächst als `File` oder `Stream` zu erzeugen:
+
+[source,java]
+----
+Bitmap myBitmap = QRCode.from("www.example.org").bitmap();
+ImageView myImage = (ImageView) findViewById(R.id.imageView);
+myImage.setImageBitmap(myBitmap);
+----
+
+== SVG Support
+
+In der kommenden Version 2.1 (oder in der aktuellen Snapshot Version) ist es möglich ebenfalls Vektorgrafiken als svg zu erzeugen:
+
+
+[source,java]
+----
+QRCode.from("www.example.org").svg();
+QRCode.from("www.example.org").withSize(250, 250).svg();
+----
+
+Hierzu wird http://www.jfree.org/jfreesvg/[JfreeSVG] verwendet. Das diese Bibliothek bestimmte Teile des Standard JDK benötigt, werden SVG bisher *nicht* unter Android untertsützt.
