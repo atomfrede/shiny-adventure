@@ -10,20 +10,10 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="//atomfrede.github.io/shiny-adventure/themes/ichi/favicon.ico">
+    <link rel="shortcut icon" href="//atomfrede.github.io/shiny-adventure/themes/Casper/favicon.ico">
 
-    <script type="text/javascript" src="//atomfrede.github.io/shiny-adventure/themes/ichi/assets/js/vendor/fastclick.js?v=1.0.0"></script>
-    <script type="text/javascript" src="//atomfrede.github.io/shiny-adventure/themes/ichi/assets/js/vendor/modernizr.js?v=1.0.0"></script>
-
-
-    <link rel="stylesheet" type="text/css" href="//atomfrede.github.io/shiny-adventure/themes/ichi/assets/css/normalize.css?v=1.0.0" />
-    <link rel="stylesheet" type="text/css" href="//atomfrede.github.io/shiny-adventure/themes/ichi/assets/css/foundation.min.css?v=1.0.0" />
-    <!--[if lte IE 8]>
-        <link rel="stylesheet" type="text/css" href="//atomfrede.github.io/shiny-adventure/themes/ichi/assets/css/outdatedBrowser.min.css?v=1.0.0">
-    <![endif]-->
-    <link rel="stylesheet" type="text/css" href="//atomfrede.github.io/shiny-adventure/themes/ichi/assets/fonts/foundation-icons/foundation-icons.css?v=1.0.0" />
-    <link rel="stylesheet" type="text/css" href="//atomfrede.github.io/shiny-adventure/themes/ichi/assets/css/styles.css?v=1.0.0" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300,700,400|Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic" />
+    <link rel="stylesheet" type="text/css" href="//atomfrede.github.io/shiny-adventure/themes/Casper/assets/css/screen.css?v=1.0.0" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
 
     <link rel="canonical" href="https://atomfrede.github.io/shiny-adventure/2015/03/13/Schatten-in-XFCE-412.html" />
     
@@ -33,7 +23,7 @@
     <meta property="og:description" content="Das neue XFCE 4.12 rendered per Default Schatten unterhalbt von Leisten. Was bei normalen Leisten auf dem Desktop eventuell noch Sinn macht ist bei Docks wie Conky oder in meinem Fall Plank leider sehr unpraktisch wie man am folgenden..." />
     <meta property="og:url" content="https://atomfrede.github.io/shiny-adventure/2015/03/13/Schatten-in-XFCE-412.html" />
     <meta property="article:published_time" content="2015-03-12T23:00:00.000Z" />
-    <meta property="article:modified_time" content="2015-04-19T12:20:07.273Z" />
+    <meta property="article:modified_time" content="2015-04-19T12:25:53.218Z" />
     <meta property="article:tag" content="xfce" />
     
     <meta name="twitter:card" content="summary" />
@@ -56,7 +46,7 @@
     "headline": "Schatten in XFCE 4.12",
     "url": "https://atomfrede.github.io/shiny-adventure/2015/03/13/Schatten-in-XFCE-412.html",
     "datePublished": "2015-03-12T23:00:00.000Z",
-    "dateModified": "2015-04-19T12:20:07.273Z",
+    "dateModified": "2015-04-19T12:25:53.218Z",
     "keywords": "xfce",
     "description": "Das neue XFCE 4.12 rendered per Default Schatten unterhalbt von Leisten. Was bei normalen Leisten auf dem Desktop eventuell noch Sinn macht ist bei Docks wie Conky oder in meinem Fall Plank leider sehr unpraktisch wie man am folgenden..."
 }
@@ -68,86 +58,29 @@
 </head>
 <body class="post-template tag-xfce">
 
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdate" href="http://outdatedbrowser.com/">Update my browser now</a></p>
-</div>
-
-<nav class="top-bar hide-for-large-up" data-topbar >
-  <ul class="title-area">
-    <li class="name">
-
-    </li>
-    <li class="home"><a class="fi-home" href="https://atomfrede.github.io/shiny-adventure"></a></li>
-    <li class="toggle-topbar"><a href="#" id="trigger-overlay" class="fi-list"></a></li>
-  </ul>
-
-<div class="overlay overlay-scale">
-    <button type="button" class="overlay-close">Close</button>
-    <nav>
-        <ul>
-            <li><a href="https://atomfrede.github.io/shiny-adventure">Home</a></li>
-        </ul>
-    </nav>
-</div>
-
-</nav>
-
-<div class="row">
-
-<div class="small-16 medium-16 large-4 columns right head-area" >
-
-<header class="site-head">
-    <div class="vertical">
-        <div class="site-head-content inner">
-            <ul class="side-nav blog-menu show-for-large-up">
-                <li><a class="fi-home" href="https://atomfrede.github.io/shiny-adventure"></a></li>
-                <li><a class="fi-torso" href="https://atomfrede.github.io/shiny-adventure/about"></a></li>
-                <li><a class="fi-mail" href="https://atomfrede.github.io/shiny-adventure/contact"></a></li>
-            </ul>
-            <a class="blog-logo" href="https://atomfrede.github.io/shiny-adventure"><img alt="Shiny Adventures" src="https://avatars2.githubusercontent.com/u/203401?v=3&amp;s=460" alt="Blog Logo" /></a>
-            <h1 class="blog-title">Shiny Adventures</h1>
-            <hr>
-            <p class="blog-description">Of a former student of Computer Science</p>
-            <div class="blog-network">
-<!--                 <a href="#" class="fi-social-pinterest"></a>
-                <a href="#" class="fi-social-linkedin"></a>
-                <a href="#" class="fi-social-behance"></a>
-                <a href="#" class="fi-social-deviant-art"></a>
-                <a href="#" class="fi-social-dribbble"></a>
-                <a href="#" class="fi-social-flickr"></a>
-                <a href="#" class="fi-social-github"></a>
-                <a href="#" class="fi-social-skype"></a>
-                <a href="#" class="fi-social-snapchat"></a>
-                <a href="#" class="fi-social-steam"></a>
-                <a href="#" class="fi-social-xbox"></a>
-                <a href="#" class="fi-social-reddit"></a> -->
-                  <a href="https://plus.google.com/+FrederikHahne" class="fi-social-google-plus"></a>
-                  <a href="https://github.com/atomfrede" class="fi-social-github"></a>
-                  <a href="https://twitter.com/atomfrede" class="fi-social-twitter"></a>
-                  <a href="https://www.facebook.com/frederik.hahne" class="fi-social-facebook"></a>
-            </div>
-        </div>
-    </div>
-</header>
-
-</div>
-
-
-<div class="small-16 medium-16 large-12 columns main-column left">
     
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="https://atomfrede.github.io/shiny-adventure">Home</a>
+        <!-- <a class="subscribe-button icon-feed" href="https://atomfrede.github.io/shiny-adventure/rss/">Subscribe</a> -->
+    </nav>
+</header>
 
 <main class="content" role="main">
 
     <article class="post tag-xfce">
 
-
+        <header class="post-header">
             <h1 class="post-title">Schatten in XFCE 4.12</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-03-13">13 March 2015</time>  on <a href="https://atomfrede.github.io/shiny-adventure/tag/xfce">xfce</a>
+            </section>
+        </header>
 
-            <span class="post-meta label"><time datetime="2015-03-13">13 Mar 2015</time></span>
-
-            <section class="post-content">
-                <div class="paragraph">
+        <section class="post-content">
+            <div class="paragraph">
 <p>Das neue XFCE 4.12 rendered per Default Schatten unterhalbt von Leisten. Was bei normalen Leisten auf dem Desktop eventuell noch Sinn macht ist bei Docks wie <a href="http://www.produnis.de/blog/?p=2261">Conky</a> oder in meinem Fall Plank leider sehr unpraktisch wie man am folgenden Screenshot sehen kann. Die Lösung ist relativ einfach, man muss nur den Haken bei "Schatten unter Leisten anzeigen" entfernen und schon ist alles wieder normal!</p>
 </div>
 <div class="imageblock">
@@ -155,56 +88,55 @@
 <img src="https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/2015-03-13-001.png" alt="2015 03 13 001.png">
 </div>
 </div>
-                        <aside class="tags fi-pricetag-multiple">Posted on <a href="https://atomfrede.github.io/shiny-adventure/tag/xfce">xfce</a></aside>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="" style="background-image: url(https://avatars.githubusercontent.com/u/203401?v=3)"><span class="hidden">Frederik Hahne's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="">Frederik Hahne</a></h4>
+
+                    <p>Read <a href="">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    <span class="author-location icon-location">Paderborn, Germany</span>
+                    <span class="author-link icon-link"><a href="http://atomfrede.github.com/shiny-adventure/">http://atomfrede.github.com/shiny-adventure/</a></span>
+                </div>
             </section>
-            <hr>
-            <footer class="post-footer">
-
-                <section class="share">
-                    <h4>Liked this post ? Share it.</h4>
-                    <a class="fi-social-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://atomfrede.github.io/shiny-adventure/2015/03/13/Schatten-in-XFCE-412.html"
-                        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    </a>
-                    <a class="fi-social-twitter" href="https://twitter.com/share?text=Schatten%20in%20XFCE%204.12&amp;url=https://atomfrede.github.io/shiny-adventure/2015/03/13/Schatten-in-XFCE-412.html"
-                        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    </a>
-                    <a class="fi-social-google-plus" href="https://plus.google.com/share?url=https://atomfrede.github.io/shiny-adventure/2015/03/13/Schatten-in-XFCE-412.html"
-                       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    </a>
-                </section>
-
-                <section class="author">
-                    <header>
-                        <span>About the author</span>
-                    </header>
-                    <section>
-                        <h4>Frederik Hahne</h4>
-                        <img src="https://avatars.githubusercontent.com/u/203401?v=3">
-                        <span>Paderborn, Germany</span>
-                        <a href="http://atomfrede.github.com/shiny-adventure/">http://atomfrede.github.com/shiny-adventure/</a>
-                    </section>
-                    <footer>
-                         <p></p>
-                    </footer>
-                </section>
-
-        <div class="clearfix"></div>
-                    <hr>
-
-            </footer>
-
-        <h3 class="title-disqus"><span class="fi-comments"></span>Discussions</h3>
 
 
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=Schatten%20in%20XFCE%204.12&amp;url=https://atomfrede.github.io/shiny-adventure/2015/03/13/Schatten-in-XFCE-412.html"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://atomfrede.github.io/shiny-adventure/2015/03/13/Schatten-in-XFCE-412.html"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://atomfrede.github.io/shiny-adventure/2015/03/13/Schatten-in-XFCE-412.html"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
 
 
     </article>
 
 </main>
 
-</div>
 
-</div>
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="https://atomfrede.github.io/shiny-adventure">Shiny Adventures</a> &copy; 2015</section>
+        <section class="poweredby">Proudly published with <a href="http://hubpress.io">HubPress</a></section>
+    </footer>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
       <script type="text/javascript">
@@ -219,14 +151,8 @@
         hljs.initHighlightingOnLoad();      
       </script>
 
-    <!--[if lte IE 8]>
-        <script type="text/javascript" src="//atomfrede.github.io/shiny-adventure/themes/ichi/assets/js/outdatedBrowser.min.js?v=1.0.0"></script>
-    <![endif]-->
-    <script type="text/javascript" src="//atomfrede.github.io/shiny-adventure/themes/ichi/assets/js/min/built.js?v=1.0.0"></script>
-
-    <script>
-      $(document).foundation();
-    </script>
+    <script type="text/javascript" src="//atomfrede.github.io/shiny-adventure/themes/Casper/assets/js/jquery.fitvids.js?v=1.0.0"></script>
+    <script type="text/javascript" src="//atomfrede.github.io/shiny-adventure/themes/Casper/assets/js/index.js?v=1.0.0"></script>
 
 </body>
 </html>
