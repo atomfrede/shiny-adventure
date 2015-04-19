@@ -1,5 +1,6 @@
 = QRGen mit Android Support und SVG Support
 :hp-tags: QRGen, Android, SVG, QRCode
+
 Vor etwas längerer Zeit habe ich bereits über https://github.com/kenglxn/QRGen[QRGen] berichtet. Mit QRGen ist sehr einfach möglich QRCodes für URLs und VCards zu erzeugen. Es fehlte allerdings https://github.com/kenglxn/QRGen/issues/2[Android] und https://github.com/kenglxn/QRGen/issues/40[SVG Support]. 
 
 Seit Version 2.0 ist es möglich auf Android QRCodes zu erzeugen. Um das ganze möglich zu machen musste die Library in drei Teile aufgeteilt werden: `core`, `javase` und `android`, damit der Android-Teil keine Abhängigkeiten zum `BufferedImage` aus dem StandardJDK hat.
