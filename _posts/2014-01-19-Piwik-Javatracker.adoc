@@ -1,0 +1,33 @@
+= Piwik Javatracker
+:hp-tags: Piwik, Java
+:published_at: 2014-01-19
+
+Jeder kennt google analytics und vielleicht auch die freie alternative http://www.piwik.org/[Piwik]. Die Einbindung passiert normalerweiße über ein kleines JavaScript Snippet, sodass bei jedem Seitenaufruf die Piwik-Instanz informiert wird. Bereits vor längerer Zeit stellte sich das Problem, wie man eine http://wwww.wicket.apache.org/[Wicket Webanwendung] an Piwik anbindet.
+
+Mein erster Gedanke, einfach das JS Snippet als Resource in jede Seite einzubinden hat leider nicht geklappt, Piwik wurde nicht über Seitenbesuche informiert. Doch zum Glück gibt es eine https://github.com/piwik/piwik-java-tracking[Java-Implementierung der Tracking Api]. Das ganze habe ich dann folgendermaßen eingebunden:
+
+Jede `Page` implementiert das Interface `PiwikTrackable`:
+
+[source,java]
+.PiwikTrackable.java
+----
+public interface PiwikTrackable {
+  void trackPageVisit();
+  void trackPageVisit(String title);
+}
+----
+
+In der `BasePage` kann man nun ganz einfach zumindest einen Besuch der entsprechenden Seite tracken, indem man einfach die implementierte Methode `trackPageVisit(String title)` aufruft:
+
+[source,java]
+.BasePage.java
+----
+@Override
+  public void trackPageVisit(String title) {
+      HttpServletRequest servletReq = (HttpServletRequest) getRequest().getContainerRequest();
+          SimplePiwikTracker spwt = new SimplePiwikTracker(1, "url-zu-deiner-piwik-installation", servletReq);
+          spwt.sendRequest(spwt.getPageTrackURL(title));
+  }
+----
+
+Diese Methode hat einen Nachteil, es wird tatsächlich nur der Besuch protokolliert. Wenn mehr Informationen (z.B. verwendeter Browser) benötigt werden, dann müssen diese Informationen zuerst ausgelesen werden. Mit Wicket geht es am einfachsten, wenn man sich an die Dokumentation zu http://ci.apache.org/projects/wicket/apidocs/6.x/[ClientProperties] hält und dann diese Informationen in den `PiwikRequest` schreibt.
