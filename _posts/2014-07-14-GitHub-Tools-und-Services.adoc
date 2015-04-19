@@ -11,4 +11,4 @@ https://travis-ci.org/[Travis CI] ist ein Cloudservice, der eigentlich nichts an
 
 Durch die enge Integration von Travis in GitHub wird jeder push automatisch gebaut. Jeder Pull-Request wird von Travis gemerged und dann gebaut, das Result wird dann in den Thread des PRs auf GitHub publiziert, sodass der Autor des PRs und der Besitzer transparent und zeitnah über einen möglicherweiße fehlerhaften PR informiert werden.
 
-image::travis-pr-01.png[Pull-Request während eines Builds]
+image::https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/travis-pr-01.png[Pull-Request während eines Builds]
