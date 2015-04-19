@@ -1,0 +1,14 @@
+= GitHub Tools und Services
+:published_at: 2014-07-14
+:hp-tags: Github, Travis, Coveralls, Opensource
+
+Jeder kennt vermutlich https://github.com/[GitHub] und hat bestimmt schonmal gedacht, wie es vor GitHub gewesen ist und warum GitHub die http://honza.ca/2011/03/7-ways-github-has-changed-the-open-source-world[Softwareentwicklung verändert hat]. Es gab schon vor GitHub eine Reihe von Anbietern, die Versionskontrolle für OSS Projekte kostenos zur Verfügung gestellt haben, wie Googlecode, Sourceforge und Bitbucket. Der größte Unterschied meiner Meinung nach ist die Tatsache, dass GitHub von Beginn an eine Api angeboten hat um Drittanbietern die Interaktion mit einem Projektrepository zu ermöglichen. Dadurch hat sich ein großes Ökosystem von Tools rund um GitHub gebildet, die es einem möglich machen nahezu ausschließlich auf kostenlose Services zu setzen um z.B. sein Projekt mit per continuous integration zu bauen.
+
+Folgende Tools sollte man sich als (Java)entwickler auf jedenfalls mal näher anschauen:
+
+== Travis CI, Drone.io
+https://travis-ci.org/[Travis CI] ist ein Cloudservice, der eigentlich nichts anderes macht als ein Projekt zu bauen. Mit Hilfe einer kleinen Konfigurationsdatei kann man allerhand Einstellungen vornehmen, sodass sehr viele (Sonder)fälle abgedeckt werden können. Es ist zum Beispiel auch sehr einfach möglich eine gebaute Anwendung direkt auf https://heroku.com/[Heroku] zu deployen. Da jeder Build in einer eigenen VM abläuft kann man im Notfall, falls die Konfigurationsmöglichkeiten nicht ausreichen auch ein Shell-Script ausführen, dass mache ich zum Beispiel um die https://github.com/atomfrede/mensa-upb[Mensa-UPB App] zu bauen, da die Standardkonfiguration für Android-Projekte immer etwas hinter der aktuellsten Version der Build-Tools hinterherhinkt.
+
+Durch die enge Integration von Travis in GitHub wird jeder push automatisch gebaut. Jeder Pull-Request wird von Travis gemerged und dann gebaut, das Result wird dann in den Thread des PRs auf GitHub publiziert, sodass der Autor des PRs und der Besitzer transparent und zeitnah über einen möglicherweiße fehlerhaften PR informiert werden.
+
+image::travis-pr-01.png[Pull-Request während eines Builds]
