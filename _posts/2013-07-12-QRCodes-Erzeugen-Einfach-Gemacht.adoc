@@ -1,0 +1,25 @@
+= QRCodes Erzeugen Einfach Gemacht
+:published_at: 2013-07-12
+:hp-tags: QRCode,QRgen
+
+In einem privaten Projekt (eine Wicket Web-Anwendung) stand ich neulich vor der Aufgabe QRCodes zu erzeugen, die zu Seiten der Anwendung führen sollten. Ich hatte noch im Kopf, dass Zxing eine ganze Bibliothek für Java zur Vefügung stellt um jegliche Art von Barcodes (also auch QRCodes) zu erzeugen und zu lesen. Nach einem kurzen Überblick war mir eigentlich klar, dass http://code.google.com/p/zxing/[ZXing] extrem mächtig ist und auch das könnte was will, nämlich einen QRCode für www.example.org/example-page erzeugen.
+
+Aber die API ist nicht so einfach zu benutzen, da man sehr viele Parameter korrekt setzen muss, damit am Ende ein brauhbarer QRCode herauskommt. Meine Wunsch war etwas der Art
+
+`File f = QRCode.from("www.example.com/example-page");`
+
+Und nach einer kleinen Recherche wurde ich auch https://github.com/kenglxn/QRGen[fündig].
+
+Diese kleine feine Bibliothek verwendet Zxing und stellt eine sehr einfach API zur Erzeugung von QRCodes zur Verfügung:
+
+`File f = QRCode.from("www.example.org/page-example").withSize(250, 250).to(ImageType.JPG).file();`
+
+Leider fehlte noch eine Kleinigkeit um die ganze Sache perfekt zu machen. Die Methode file() erzeugt eine temporäre Datei mit dem Prefix QRCode. Da ist auch prima, wenn man genau einen QRCode erzeugen will. In meinem Fall musste ich eine ganze Reihe von QRCodes erzeugen, die später ausgedruckt werden sollten. Da ist es natürlich unpraktisch wenn man nicht weiß zu welcher Seite der gerade ausgedruckte QRCode leiten wird.
+
+Das ganze läst sich natürlich recht einfach umgehen, indem man die erzeugte Datei in eine andere kopiert und umbenennt, aber ich hab mir die Mühe gemacht und das ganze in der Bibliothek gefixed und einen https://github.com/kenglxn/QRGen/pull/3[Pull-Request] eröffnet. Dadurch kann man nun folgendes machen:
+
+`File foo = QRCode.from("www.example.com/example-page").file("foo");`
+
+`File bar = QRCode.from("www.example.com/example-bar").file("bar");`
+
+Die Erweiterung ist seit http://search.maven.org/#browse|-852965118[Version 1.3 in Maven Central verfügbar].
