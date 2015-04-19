@@ -12,3 +12,17 @@ https://travis-ci.org/[Travis CI] ist ein Cloudservice, der eigentlich nichts an
 Durch die enge Integration von Travis in GitHub wird jeder push automatisch gebaut. Jeder Pull-Request wird von Travis gemerged und dann gebaut, das Result wird dann in den Thread des PRs auf GitHub publiziert, sodass der Autor des PRs und der Besitzer transparent und zeitnah über einen möglicherweiße fehlerhaften PR informiert werden.
 
 image::https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/travis-pr-01.png[Pull-Request während eines Builds]
+
+image::https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/travis-pr-02.png[Pull-Request nach erfolreichem Build]
+
+https://drone.io/[Drone.io] ist sehr ähnlich zu Travis, unterstützt aber auch https://bitbucket.org/[Bitbucket]. Drone.io verfolgt einen sehr minimalistischen Ansatz. Es ist für ein Standardprojekt (z.B. Gradle oder Maven) keine weitere Konfiguration nötig. Wie bei Travis kann der eigentliche Befehl zum Build angepasst werden (direkt in der Weboberfläche) und z.B. durch ein shell script implementiert werden. Drone integriert sich nicht so tief in GitHub, daher bevorzuge ich Travis, wenn man sowieso schon seinen Source-Code auf GitHub liegen hat. Drone.io reagiert auf push-events sehr viel schneller als Travis, allerdings vermute ich, dass es daran liegt, dass drone.io noch nicht so stark benutzt wird wie travis und daher einfach mehr Kapazitäten (noch) frei sind.
+
+== Coveralls
+https://coveralls.io/[Coveralls] aggregiert die während des Builds erstellten Code Coverage Reports in einer übersichtlichen Art und Weise. Die Daten müssen durch das Buildwerkzeug bereits erstellt worden sein, Coveralls ist nur ein “Frontend” zur Darstellung der Coverage. Ähnlich wie bei Travis ist die Integration in GitHub sehr tief. Bei jedem Pull Request trägt Coveralls das Resultat in den PR ein.
+
+image::https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/coverall-pr-01.png[Änderung der Coverage, wenn der PR gemerged werden würde]
+
+== Waffle.io
+Und für eine schicke Ticketverwaltung kann man https://waffle.io/[waffle.io] mal ausprobieren. Ein Waffle Board ist ein kleines, digitale Scrum/Kanban Board. Jede Änderung in GitHub ist direkt in Waffle sichtbar und umgekehrt, sehr praktisch.
+
+image::https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/waffle.png[Waffle Kanban Style Board]
