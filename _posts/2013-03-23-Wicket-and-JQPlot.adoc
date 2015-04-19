@@ -40,3 +40,12 @@ add(new JQPlotChart("chart", lineChart));
 ----
 Im Zuge dessen habe ich natürlich auch JQPlot auf den neusten Stand gebracht, da die Version in jqplot4java noch ein wenig älter ist.
 
+'''
+Quellen:
+
+* https://github.com/inaiat/jqplot4java[jqplot4java]
+* https://plus.google.com/communities/117863180192631404972/stream/6cecd3e0-55a5-4fea-b48d-354bb4ffe227[https://plus.google.com/communities/117863180192631404972/stream/6cecd3e0-55a5-4fea-b48d-354bb4ffe227]
+* http://wicketinaction.com/2012/07/wicket-6-resource-management/[Wicket 6 Resource Management]
+* https://github.com/atomfrede/cloaked-forest/blob/master/application/src/main/java/de/atomfrede/forest/alumni/application/wicket/jqplot/JQPlotChart.java[JQPlotChart.java]
+* https://github.com/atomfrede/cloaked-forest/blob/master/application/src/main/java/de/atomfrede/forest/alumni/application/wicket/jqplot/JQPlotBehaviour.java[JQPlotBehaviour.java]
+
