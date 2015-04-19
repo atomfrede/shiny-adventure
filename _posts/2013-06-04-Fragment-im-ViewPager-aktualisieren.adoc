@@ -1,0 +1,40 @@
+= Fragment im ViewPager aktualisieren
+:published_at: 2013-06-04
+:hp-tags: Android, ViewPager
+
+In meiner http://atomfrede.github.io/scc/[Sprintercup App für Android] benutze ich einen http://developer.android.com/reference/android/support/v4/view/ViewPager.html[ViewPager] um zwischen den einzelnen Läufen zu wechseln. Der Benutzer sollte in Lage sein einen Lauf als abgeschlossen zu markieren, wodurch sich die Darstellung des enthaltenen http://developer.android.com/guide/topics/ui/layout/listview.html[ListView]s ändert. Hierzu muss man dem ListView natürlich mitteilen, dass sich der Inhalt geändert hat und er sich doch bitte neu zeichen sollte.
+
+Da der ViewPpager die enthaltenen Fragments nicht alle im Speicher hält musste eine bessere Lösung her. Die erste Idee funktionierte auch schon ganz gut. Hierzu habe ich einen einen kleinen http://developer.android.com/reference/android/util/LruCache.html[LruCache] innerhalb des http://developer.android.com/reference/android/support/v4/app/FragmentStatePagerAdapter.html[FragmentStatePagerAdapter]s zu verwenden.
+
+[source,java]
+----
+@Override
+public Fragment getItem(int position) {
+       LapEntryFragment currentFragment = LapEntryFragment.newInstance(mLaps.get(position).getId());
+       //erzeugtes Fragment im LruCache speichern
+       position_fragment.put(position, currentFragment);
+       return currentFragment;
+}
+----
+
+Das ganze geht allerdings nur so lange gut, bis man z.B. das Handy dreht, da dann der ViewPager neu initialisiert wird und daruch auch der Cache geleert wird. Der verwendete FragmentStatePagerAdapter bietet allerdngs eine passende Methode an, sodass man an auf entsprechende Fragment an Position i zugreifen kann. Hierbei wird entweder ein bereits vorhandes Fragment zurückgegeben oder es wird eines erzeugt:
+
+`PagerAdapter.instantiateItem(mPager, lastSelectedPagerPositon);`
+
+Das ganze sieht dann so aus (verkürzt):
+
+
+[source,java]
+----
+public void markAsDone() {
+        //Datenbank Objekte aktualisieren
+        mLaps.get(lastSelectedPagerPositon).setIsDone(true);
+        Lap lap = mLapDao.load(selectedLapId);
+        lap.setIsDone(true);
+        mLapDao.update(lap);
+        //Fragment laden
+        LapEntryFragment_ lapEntryFragment = (LapEntryFragment_)mPagerAdapter.instantiateItem(mPager, lastSelectedPagerPositon);
+        //Darstellung aktualisieren
+        lapEntryFragment.mEntryAdapter.notifyDataSetChanged();
+}
+----
