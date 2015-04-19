@@ -32,3 +32,11 @@ public void renderHead(Component component, IHeaderResponse response) {
 }
 ----
 
+Um nun ein Plot in einem div mit dem Namen chart anzuzeigen reicht folgender Befehl aus:
+
+[source,java]
+----
+add(new JQPlotChart("chart", lineChart));
+----
+Im Zuge dessen habe ich natürlich auch JQPlot auf den neusten Stand gebracht, da die Version in jqplot4java noch ein wenig älter ist.
+
