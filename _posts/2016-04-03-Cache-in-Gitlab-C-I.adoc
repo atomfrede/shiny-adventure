@@ -1,1 +1,32 @@
 = Cache in Gitlab CI
+
+When using http://doc.gitlab.com/ce/ci/yaml/README.html[gitlab ci] one might know the cache property. With defining cached files these are used for subsequent build (instead of downloading them again). This is extremly useful when using a docker executor, the shell executor doesn't need a cache as long as a build doesn't remove downloaded or generated artifacts.
+
+But the build can only cache artifacts in the https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/issues/327:[current working directory], so you can't cache e.g. the local ``.m2`` folder in order to avoid downloading artifacts every build. Furthermore *everything* inside the ``/cache`` folder is automatically cached by the ci runner.
+
+Therefore if we could make maven download its artifacts to ``/cache/.m2`` instead of ``${USER_HOME}/.m2`` all downloaded artifacts will be cached. This can be done by providing ``-Dmaven.repo.local`` parameter:
+
+```yml
+image: java
+stages:
+  - build
+mvn-package:
+  stage: build
+  script: "./mvnw package -Dmaven.repo.local=/cache"
+```
+
+When executing the build a second time it doesn't download all artifacts anymore, only changed ones.
+For me as a huge gradle fan I needed cache for gradle dependencies as well. This is also very easy and even caches the downloaed ``gradle wrapper`` for subsequent builds:
+
+
+```yml
+image: java
+stages:
+  - build
+gradle-assemble:
+  stage: build
+  script: "./gradlew -g /cache assemble"
+```
+
+
+:hp-tags: gitlab, maven, gradle, docker, jhipster, english
