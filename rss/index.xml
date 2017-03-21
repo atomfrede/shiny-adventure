@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Shiny Adventures]]></title><description><![CDATA[Of a former computer science student, now nerd and jhipster ]]></description><link>https://atomfrede.github.io/shiny-adventure</link><generator>RSS for Node</generator><lastBuildDate>Tue, 21 Mar 2017 06:16:08 GMT</lastBuildDate><atom:link href="https://atomfrede.github.io/shiny-adventure/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Cache in Gitlab CI]]></title><description><![CDATA[<div class="paragraph">
+<p>When using <a href="http://doc.gitlab.com/ce/ci/yaml/README.html">gitlab ci</a> one might know the cache property. With defining cached files these are used for subsequent build (instead of downloading them again). This is extremly useful when using a docker executor, the shell executor doesn&#8217;t need a cache as long as a build doesn&#8217;t remove downloaded or generated artifacts.</p>
+</div>
+<div class="paragraph">
+<p>But the build can only cache artifacts in the <a href="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/issues/327:">current working directory</a>, so you can&#8217;t cache e.g. the local <code>.m2</code> folder in order to avoid downloading artifacts every build. Furthermore <strong>everything</strong> inside the <code>/cache</code> folder is automatically cached by the ci runner.</p>
+</div>
+<div class="paragraph">
+<p>Therefore if we could make maven download its artifacts to <code>/cache/.m2</code> instead of <code>${USER_HOME}/.m2</code> all downloaded artifacts will be cached. This can be done by providing <code>-Dmaven.repo.local</code> parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yml" data-lang="yml">image: java
+stages:
+  - build
+mvn-package:
+  stage: build
+  script: "./mvnw package -Dmaven.repo.local=/cache"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When executing the build a second time it doesn&#8217;t download all artifacts anymore, only changed ones.
+For me as a huge gradle fan I needed cache for gradle dependencies as well. This is also very easy and even caches the downloaed <code>gradle wrapper</code> for subsequent builds:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yml" data-lang="yml">image: java
+stages:
+  - build
+gradle-assemble:
+  stage: build
+  script: "./gradlew -g /cache assemble"</code></pre>
+</div>
+</div>]]></description><link>https://atomfrede.github.io/shiny-adventure/2016/04/03/Cache-in-Gitlab-C-I.html</link><guid isPermaLink="true">https://atomfrede.github.io/shiny-adventure/2016/04/03/Cache-in-Gitlab-C-I.html</guid><dc:creator><![CDATA[Frederik Hahne]]></dc:creator><pubDate>Sun, 03 Apr 2016 00:00:00 GMT</pubDate></item><item><title><![CDATA[QRGen mit Android Support und SVG Support]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Vor etwas längerer Zeit habe ich bereits über <a href="https://github.com/kenglxn/QRGen">QRGen</a> berichtet. Mit QRGen ist sehr einfach möglich QRCodes für URLs und VCards zu erzeugen. Es fehlte allerdings <a href="https://github.com/kenglxn/QRGen/issues/2">Android</a> und <a href="https://github.com/kenglxn/QRGen/issues/40">SVG Support</a>.</p>
+</div>
+<div class="paragraph">
+<p>Seit Version 2.0 ist es möglich auf Android QRCodes zu erzeugen. Um das ganze möglich zu machen musste die Library in drei Teile aufgeteilt werden: <code>core</code>, <code>javase</code> und <code>android</code>, damit der Android-Teil keine Abhängigkeiten zum <code>BufferedImage</code> aus dem StandardJDK hat.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_android">Android</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Um QRGen innerhalb eine AndroidAPP zu verwenden, muss folgende Abhängigkeit in verwendet werden:</p>
+</div>
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
+    compile ("net.glxn.qrgen:android:2.0")
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Dann stehen alle Methoden zur Verfügung, welche QRGen anbietet. Als Bonus ist es möglich direkt ein Android <code>Bitmap</code> zu erzeugen ohne das ganze zunächst als <code>File</code> oder <code>Stream</code> zu erzeugen:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Bitmap myBitmap = QRCode.from("www.example.org").bitmap();
+ImageView myImage = (ImageView) findViewById(R.id.imageView);
+myImage.setImageBitmap(myBitmap);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_svg_support">SVG Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In der kommenden Version 2.1 (oder in der aktuellen Snapshot Version) ist es möglich ebenfalls Vektorgrafiken als svg zu erzeugen:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">QRCode.from("www.example.org").svg();
+QRCode.from("www.example.org").withSize(250, 250).svg();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Hierzu wird <a href="http://www.jfree.org/jfreesvg/">JfreeSVG</a> verwendet. Das diese Bibliothek bestimmte Teile des Standard JDK benötigt, werden SVG bisher <strong>nicht</strong> unter Android untertsützt.</p>
+</div>
+</div>
+</div>]]></description><link>https://atomfrede.github.io/shiny-adventure/2015/04/19/QRGen-mit-Android-Support-und-SVG-Support.html</link><guid isPermaLink="true">https://atomfrede.github.io/shiny-adventure/2015/04/19/QRGen-mit-Android-Support-und-SVG-Support.html</guid><category><![CDATA[QRGen]]></category><category><![CDATA[ Android]]></category><category><![CDATA[ SVG]]></category><category><![CDATA[ QRCode]]></category><dc:creator><![CDATA[Frederik Hahne]]></dc:creator><pubDate>Sun, 19 Apr 2015 00:00:00 GMT</pubDate></item><item><title><![CDATA[Schatten in XFCE 4.12]]></title><description><![CDATA[<div class="paragraph">
+<p>Das neue XFCE 4.12 rendered per Default Schatten unterhalbt von Leisten. Was bei normalen Leisten auf dem Desktop eventuell noch Sinn macht ist bei Docks wie <a href="http://www.produnis.de/blog/?p=2261">Conky</a> oder in meinem Fall Plank leider sehr unpraktisch wie man am folgenden Screenshot sehen kann. Die Lösung ist relativ einfach, man muss nur den Haken bei "Schatten unter Leisten anzeigen" entfernen und schon ist alles wieder normal!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/2015-03-13-001.png" alt="2015 03 13 001.png">
+</div>
+</div>]]></description><link>https://atomfrede.github.io/shiny-adventure/2015/03/13/Schatten-in-XFCE-412.html</link><guid isPermaLink="true">https://atomfrede.github.io/shiny-adventure/2015/03/13/Schatten-in-XFCE-412.html</guid><category><![CDATA[xfce]]></category><dc:creator><![CDATA[Frederik Hahne]]></dc:creator><pubDate>Fri, 13 Mar 2015 00:00:00 GMT</pubDate></item><item><title><![CDATA[Hello World]]></title><description><![CDATA[<div class="paragraph">
+<p>Der technologische Unterbau meines "Blogs" hat sich mal wieder geändert. Diesmal von <a href="http://octopress.org/">Octopress</a> zu <a href="http://hubpress.io/">Hubpress</a>, was ein einfaches editieren im Browsers (Hooray for HTML5) möglich macht.</p>
+</div>
+<div class="paragraph">
+<p>Alle alten Artikel werden im Laufe der Zeit noch hierher umgezogen!</p>
+</div>]]></description><link>https://atomfrede.github.io/shiny-adventure/2015/03/07/Hello-World.html</link><guid isPermaLink="true">https://atomfrede.github.io/shiny-adventure/2015/03/07/Hello-World.html</guid><category><![CDATA[HubPress]]></category><category><![CDATA[ Octopress]]></category><category><![CDATA[ HTML5]]></category><dc:creator><![CDATA[Frederik Hahne]]></dc:creator><pubDate>Sat, 07 Mar 2015 00:00:00 GMT</pubDate></item><item><title><![CDATA[GitHub Tools und Services]]></title><description><![CDATA[<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jeder kennt vermutlich <a href="https://github.com/">GitHub</a> und hat bestimmt schonmal gedacht, wie es vor GitHub gewesen ist und warum GitHub die <a href="http://honza.ca/2011/03/7-ways-github-has-changed-the-open-source-world">Softwareentwicklung verändert hat</a>. Es gab schon vor GitHub eine Reihe von Anbietern, die Versionskontrolle für OSS Projekte kostenos zur Verfügung gestellt haben, wie Googlecode, Sourceforge und Bitbucket. Der größte Unterschied meiner Meinung nach ist die Tatsache, dass GitHub von Beginn an eine Api angeboten hat um Drittanbietern die Interaktion mit einem Projektrepository zu ermöglichen. Dadurch hat sich ein großes Ökosystem von Tools rund um GitHub gebildet, die es einem möglich machen nahezu ausschließlich auf kostenlose Services zu setzen um z.B. sein Projekt mit per continuous integration zu bauen.</p>
+</div>
+<div class="paragraph">
+<p>Folgende Tools sollte man sich als (Java)entwickler auf jedenfalls mal näher anschauen:</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_travis_ci_drone_io">Travis CI, Drone.io</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://travis-ci.org/">Travis CI</a> ist ein Cloudservice, der eigentlich nichts anderes macht als ein Projekt zu bauen. Mit Hilfe einer kleinen Konfigurationsdatei kann man allerhand Einstellungen vornehmen, sodass sehr viele (Sonder)fälle abgedeckt werden können. Es ist zum Beispiel auch sehr einfach möglich eine gebaute Anwendung direkt auf <a href="https://heroku.com/">Heroku</a> zu deployen. Da jeder Build in einer eigenen VM abläuft kann man im Notfall, falls die Konfigurationsmöglichkeiten nicht ausreichen auch ein Shell-Script ausführen, dass mache ich zum Beispiel um die <a href="https://github.com/atomfrede/mensa-upb">Mensa-UPB App</a> zu bauen, da die Standardkonfiguration für Android-Projekte immer etwas hinter der aktuellsten Version der Build-Tools hinterherhinkt.</p>
+</div>
+<div class="paragraph">
+<p>Durch die enge Integration von Travis in GitHub wird jeder push automatisch gebaut. Jeder Pull-Request wird von Travis gemerged und dann gebaut, das Result wird dann in den Thread des PRs auf GitHub publiziert, sodass der Autor des PRs und der Besitzer transparent und zeitnah über einen möglicherweiße fehlerhaften PR informiert werden.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/travis-pr-01.png" alt="Pull-Request während eines Builds">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/travis-pr-02.png" alt="Pull-Request nach erfolreichem Build">
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://drone.io/">Drone.io</a> ist sehr ähnlich zu Travis, unterstützt aber auch <a href="https://bitbucket.org/">Bitbucket</a>. Drone.io verfolgt einen sehr minimalistischen Ansatz. Es ist für ein Standardprojekt (z.B. Gradle oder Maven) keine weitere Konfiguration nötig. Wie bei Travis kann der eigentliche Befehl zum Build angepasst werden (direkt in der Weboberfläche) und z.B. durch ein shell script implementiert werden. Drone integriert sich nicht so tief in GitHub, daher bevorzuge ich Travis, wenn man sowieso schon seinen Source-Code auf GitHub liegen hat. Drone.io reagiert auf push-events sehr viel schneller als Travis, allerdings vermute ich, dass es daran liegt, dass drone.io noch nicht so stark benutzt wird wie travis und daher einfach mehr Kapazitäten (noch) frei sind.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_coveralls">Coveralls</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://coveralls.io/">Coveralls</a> aggregiert die während des Builds erstellten Code Coverage Reports in einer übersichtlichen Art und Weise. Die Daten müssen durch das Buildwerkzeug bereits erstellt worden sein, Coveralls ist nur ein “Frontend” zur Darstellung der Coverage. Ähnlich wie bei Travis ist die Integration in GitHub sehr tief. Bei jedem Pull Request trägt Coveralls das Resultat in den PR ein.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/coverall-pr-01.png" alt="Änderung der Coverage" width="wenn der PR gemerged werden würde">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_waffle_io">Waffle.io</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Und für eine schicke Ticketverwaltung kann man <a href="https://waffle.io/">waffle.io</a> mal ausprobieren. Ein Waffle Board ist ein kleines, digitale Scrum/Kanban Board. Jede Änderung in GitHub ist direkt in Waffle sichtbar und umgekehrt, sehr praktisch.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/waffle.png" alt="Waffle Kanban Style Board">
+</div>
+</div>
+</div>
+</div>]]></description><link>https://atomfrede.github.io/shiny-adventure/2014/07/14/GitHub-Tools-und-Services.html</link><guid isPermaLink="true">https://atomfrede.github.io/shiny-adventure/2014/07/14/GitHub-Tools-und-Services.html</guid><category><![CDATA[Github]]></category><category><![CDATA[ Travis]]></category><category><![CDATA[ Coveralls]]></category><category><![CDATA[ Opensource]]></category><dc:creator><![CDATA[Frederik Hahne]]></dc:creator><pubDate>Mon, 14 Jul 2014 00:00:00 GMT</pubDate></item><item><title><![CDATA[Piwik Javatracker]]></title><description><![CDATA[<div class="paragraph">
+<p>Jeder kennt google analytics und vielleicht auch die freie alternative <a href="http://www.piwik.org/">Piwik</a>. Die Einbindung passiert normalerweiße über ein kleines JavaScript Snippet, sodass bei jedem Seitenaufruf die Piwik-Instanz informiert wird. Bereits vor längerer Zeit stellte sich das Problem, wie man eine <a href="http://wwww.wicket.apache.org/">Wicket Webanwendung</a> an Piwik anbindet.</p>
+</div>
+<div class="paragraph">
+<p>Mein erster Gedanke, einfach das JS Snippet als Resource in jede Seite einzubinden hat leider nicht geklappt, Piwik wurde nicht über Seitenbesuche informiert. Doch zum Glück gibt es eine <a href="https://github.com/piwik/piwik-java-tracking">Java-Implementierung der Tracking Api</a>. Das ganze habe ich dann folgendermaßen eingebunden:</p>
+</div>
+<div class="paragraph">
+<p>Jede <code>Page</code> implementiert das Interface <code>PiwikTrackable</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">PiwikTrackable.java</div>
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public interface PiwikTrackable {
+  void trackPageVisit();
+  void trackPageVisit(String title);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In der <code>BasePage</code> kann man nun ganz einfach zumindest einen Besuch der entsprechenden Seite tracken, indem man einfach die implementierte Methode <code>trackPageVisit(String title)</code> aufruft:</p>
+</div>
+<div class="listingblock">
+<div class="title">BasePage.java</div>
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Override
+  public void trackPageVisit(String title) {
+      HttpServletRequest servletReq = (HttpServletRequest) getRequest().getContainerRequest();
+          SimplePiwikTracker spwt = new SimplePiwikTracker(1, "url-zu-deiner-piwik-installation", servletReq);
+          spwt.sendRequest(spwt.getPageTrackURL(title));
+  }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Diese Methode hat einen Nachteil, es wird tatsächlich nur der Besuch protokolliert. Wenn mehr Informationen (z.B. verwendeter Browser) benötigt werden, dann müssen diese Informationen zuerst ausgelesen werden. Mit Wicket geht es am einfachsten, wenn man sich an die Dokumentation zu <a href="http://ci.apache.org/projects/wicket/apidocs/6.x/">ClientProperties</a> hält und dann diese Informationen in den <code>PiwikRequest</code> schreibt.</p>
+</div>]]></description><link>https://atomfrede.github.io/shiny-adventure/2014/01/19/Piwik-Javatracker.html</link><guid isPermaLink="true">https://atomfrede.github.io/shiny-adventure/2014/01/19/Piwik-Javatracker.html</guid><category><![CDATA[Piwik]]></category><category><![CDATA[ Java]]></category><dc:creator><![CDATA[Frederik Hahne]]></dc:creator><pubDate>Sun, 19 Jan 2014 00:00:00 GMT</pubDate></item><item><title><![CDATA[QRCodes Erzeugen Einfach Gemacht]]></title><description><![CDATA[<div class="paragraph">
+<p>In einem privaten Projekt (eine Wicket Web-Anwendung) stand ich neulich vor der Aufgabe QRCodes zu erzeugen, die zu Seiten der Anwendung führen sollten. Ich hatte noch im Kopf, dass Zxing eine ganze Bibliothek für Java zur Vefügung stellt um jegliche Art von Barcodes (also auch QRCodes) zu erzeugen und zu lesen. Nach einem kurzen Überblick war mir eigentlich klar, dass <a href="http://code.google.com/p/zxing/">ZXing</a> extrem mächtig ist und auch das könnte was will, nämlich einen QRCode für www.example.org/example-page erzeugen.</p>
+</div>
+<div class="paragraph">
+<p>Aber die API ist nicht so einfach zu benutzen, da man sehr viele Parameter korrekt setzen muss, damit am Ende ein brauhbarer QRCode herauskommt. Meine Wunsch war etwas der Art</p>
+</div>
+<div class="paragraph">
+<p><code>File f = QRCode.from("www.example.com/example-page");</code></p>
+</div>
+<div class="paragraph">
+<p>Und nach einer kleinen Recherche wurde ich auch <a href="https://github.com/kenglxn/QRGen">fündig</a>.</p>
+</div>
+<div class="paragraph">
+<p>Diese kleine feine Bibliothek verwendet Zxing und stellt eine sehr einfach API zur Erzeugung von QRCodes zur Verfügung:</p>
+</div>
+<div class="paragraph">
+<p><code>File f = QRCode.from("www.example.org/page-example").withSize(250, 250).to(ImageType.JPG).file();</code></p>
+</div>
+<div class="paragraph">
+<p>Leider fehlte noch eine Kleinigkeit um die ganze Sache perfekt zu machen. Die Methode file() erzeugt eine temporäre Datei mit dem Prefix QRCode. Da ist auch prima, wenn man genau einen QRCode erzeugen will. In meinem Fall musste ich eine ganze Reihe von QRCodes erzeugen, die später ausgedruckt werden sollten. Da ist es natürlich unpraktisch wenn man nicht weiß zu welcher Seite der gerade ausgedruckte QRCode leiten wird.</p>
+</div>
+<div class="paragraph">
+<p>Das ganze läst sich natürlich recht einfach umgehen, indem man die erzeugte Datei in eine andere kopiert und umbenennt, aber ich hab mir die Mühe gemacht und das ganze in der Bibliothek gefixed und einen <a href="https://github.com/kenglxn/QRGen/pull/3">Pull-Request</a> eröffnet. Dadurch kann man nun folgendes machen:</p>
+</div>
+<div class="paragraph">
+<p><code>File foo = QRCode.from("www.example.com/example-page").file("foo");</code></p>
+</div>
+<div class="paragraph">
+<p><code>File bar = QRCode.from("www.example.com/example-bar").file("bar");</code></p>
+</div>
+<div class="paragraph">
+<p>Die Erweiterung ist seit <a href="http://search.maven.org/#browse|-852965118">Version 1.3 in Maven Central verfügbar</a>.</p>
+</div>]]></description><link>https://atomfrede.github.io/shiny-adventure/2013/07/12/QRCodes-Erzeugen-Einfach-Gemacht.html</link><guid isPermaLink="true">https://atomfrede.github.io/shiny-adventure/2013/07/12/QRCodes-Erzeugen-Einfach-Gemacht.html</guid><category><![CDATA[QRCode]]></category><category><![CDATA[QRgen]]></category><dc:creator><![CDATA[Frederik Hahne]]></dc:creator><pubDate>Fri, 12 Jul 2013 00:00:00 GMT</pubDate></item><item><title><![CDATA[Fragment im ViewPager aktualisieren]]></title><description><![CDATA[<div class="paragraph">
+<p>In meiner <a href="http://atomfrede.github.io/scc/">Sprintercup App für Android</a> benutze ich einen <a href="http://developer.android.com/reference/android/support/v4/view/ViewPager.html">ViewPager</a> um zwischen den einzelnen Läufen zu wechseln. Der Benutzer sollte in Lage sein einen Lauf als abgeschlossen zu markieren, wodurch sich die Darstellung des enthaltenen <a href="http://developer.android.com/guide/topics/ui/layout/listview.html">ListView</a>s ändert. Hierzu muss man dem ListView natürlich mitteilen, dass sich der Inhalt geändert hat und er sich doch bitte neu zeichen sollte.</p>
+</div>
+<div class="paragraph">
+<p>Da der ViewPpager die enthaltenen Fragments nicht alle im Speicher hält musste eine bessere Lösung her. Die erste Idee funktionierte auch schon ganz gut. Hierzu habe ich einen einen kleinen <a href="http://developer.android.com/reference/android/util/LruCache.html">LruCache</a> innerhalb des <a href="http://developer.android.com/reference/android/support/v4/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a>s zu verwenden.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Override
+public Fragment getItem(int position) {
+       LapEntryFragment currentFragment = LapEntryFragment.newInstance(mLaps.get(position).getId());
+       //erzeugtes Fragment im LruCache speichern
+       position_fragment.put(position, currentFragment);
+       return currentFragment;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Das ganze geht allerdings nur so lange gut, bis man z.B. das Handy dreht, da dann der ViewPager neu initialisiert wird und daruch auch der Cache geleert wird. Der verwendete FragmentStatePagerAdapter bietet allerdngs eine passende Methode an, sodass man an auf entsprechende Fragment an Position i zugreifen kann. Hierbei wird entweder ein bereits vorhandes Fragment zurückgegeben oder es wird eines erzeugt:</p>
+</div>
+<div class="paragraph">
+<p><code>PagerAdapter.instantiateItem(mPager, lastSelectedPagerPositon);</code></p>
+</div>
+<div class="paragraph">
+<p>Das ganze sieht dann so aus (verkürzt):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public void markAsDone() {
+        //Datenbank Objekte aktualisieren
+        mLaps.get(lastSelectedPagerPositon).setIsDone(true);
+        Lap lap = mLapDao.load(selectedLapId);
+        lap.setIsDone(true);
+        mLapDao.update(lap);
+        //Fragment laden
+        LapEntryFragment_ lapEntryFragment = (LapEntryFragment_)mPagerAdapter.instantiateItem(mPager, lastSelectedPagerPositon);
+        //Darstellung aktualisieren
+        lapEntryFragment.mEntryAdapter.notifyDataSetChanged();
+}</code></pre>
+</div>
+</div>]]></description><link>https://atomfrede.github.io/shiny-adventure/2013/06/04/Fragment-im-ViewPager-aktualisieren.html</link><guid isPermaLink="true">https://atomfrede.github.io/shiny-adventure/2013/06/04/Fragment-im-ViewPager-aktualisieren.html</guid><category><![CDATA[Android]]></category><category><![CDATA[ ViewPager]]></category><dc:creator><![CDATA[Frederik Hahne]]></dc:creator><pubDate>Tue, 04 Jun 2013 00:00:00 GMT</pubDate></item><item><title><![CDATA[Wicket and JQPlot]]></title><description><![CDATA[<div class="paragraph">
+<p>Ich bin ja ein großer Fan von <a href="http://wicket.apache.org/">Apache Wicket</a>. Vor kurzem musste ich kleine Graphen in einer Wicket Anwendung anzeigen. Ich habe mich dabei für <a href="http://www.jqplot.com/">JQPlot</a> entschieden. Es stellte sich jedoch sehr schnell heraus, das die <a href="https://github.com/wicketstuff/core/wiki/JqPlot-Plugin-Integration">vorhandene Integration</a> nicht merh kompatibel zu Wicket 6.x ist.</p>
+</div>
+<div class="paragraph">
+<p>Glücklicherweise ist das ganze mit einer kleinen Anpassung des <a href="http://wicketinaction.com/2012/07/wicket-6-resource-management/">Resource Management</a> gelöst.</p>
+</div>
+<div class="paragraph">
+<p>Erster Schritt war die Erstellung einer Komponente <code>JQPlotChart.java</code>, die nichts weiter macht, als die Daten des Graphen zu kapseln und das erstellte spezielle <code>JQPlotBehaviour.java</code> hinzuzufügen. Das spezielle <code>JQPlotBehaviour</code> bindet nun einfach alle benötigten Resourcen in den Header ein. Wichtig ist hierbei, dass JQuery vor JQPlot eingebunden wird, da es ansonsten (logischerweise) zu Fehlern kommt. Das ganze sieht dann so aus:</p>
+</div>
+<div class="listingblock">
+<div class="title">JQPlotBehaviour.java</div>
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Override
+public void renderHead(Component component, IHeaderResponse response) {
+        super.renderHead(component, response);
+        //Add Jquery explicitly, so it is added before JQPlot
+        response.render(JavaScriptHeaderItem.forReference(Application.get().getJavaScriptLibrarySettings().getJQueryReference()));
+
+        //Core JQPlot
+        response.render(JavaScriptHeaderItem.forReference(JQPLOT_JS));
+        response.render(CssHeaderItem.forReference(JQPLOT_CSS));
+        //Plot Type specific JQPlot Scripts
+        List&lt;String&gt; resources = JqPlotUtils.retriveJavaScriptResources(chart);
+        for (String resource : resources) {
+                response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(JQPlotBehaviour.class, resource)));
+        }
+        //Script/JSON Data String
+        String json = createJquery();
+        //Generate Plot inside DomReady Callback
+        response.render(OnDomReadyHeaderItem.forScript(json));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Um nun ein Plot in einem div mit dem Namen chart anzuzeigen reicht folgender Befehl aus:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">add(new JQPlotChart("chart", lineChart));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Im Zuge dessen habe ich natürlich auch JQPlot auf den neusten Stand gebracht, da die Version in jqplot4java noch ein wenig älter ist.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p>Quellen:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/inaiat/jqplot4java">jqplot4java</a></p>
+</li>
+<li>
+<p><a href="https://plus.google.com/communities/117863180192631404972/stream/6cecd3e0-55a5-4fea-b48d-354bb4ffe227">https://plus.google.com/communities/117863180192631404972/stream/6cecd3e0-55a5-4fea-b48d-354bb4ffe227</a></p>
+</li>
+<li>
+<p><a href="http://wicketinaction.com/2012/07/wicket-6-resource-management/">Wicket 6 Resource Management</a></p>
+</li>
+<li>
+<p><a href="https://github.com/atomfrede/cloaked-forest/blob/master/application/src/main/java/de/atomfrede/forest/alumni/application/wicket/jqplot/JQPlotChart.java">JQPlotChart.java</a></p>
+</li>
+<li>
+<p><a href="https://github.com/atomfrede/cloaked-forest/blob/master/application/src/main/java/de/atomfrede/forest/alumni/application/wicket/jqplot/JQPlotBehaviour.java">JQPlotBehaviour.java</a></p>
+</li>
+</ul>
+</div>]]></description><link>https://atomfrede.github.io/shiny-adventure/2013/03/23/Wicket-and-JQPlot.html</link><guid isPermaLink="true">https://atomfrede.github.io/shiny-adventure/2013/03/23/Wicket-and-JQPlot.html</guid><category><![CDATA[Wicket]]></category><category><![CDATA[ JQPLot]]></category><dc:creator><![CDATA[Frederik Hahne]]></dc:creator><pubDate>Sat, 23 Mar 2013 00:00:00 GMT</pubDate></item></channel></rss>
