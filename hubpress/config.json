@@ -10,7 +10,7 @@
     "description": "Of a former computer science student, now nerd and jhipster ",
     "logo": "https://avatars2.githubusercontent.com/u/203401?v=3&s=460",
     "postsPerPage": "5",
-    "cover": "",
+    "cover": "https://pbs.twimg.com/profile_banners/103303375/1474916169/1500x500",
     "delay": "",
     "googleAnalytics": "",
     "disqus": ""
@@ -28,12 +28,12 @@
     "stackoverflow": ""
   },
   "theme": {
-    "name": "uno-zen"
+    "name": "uno"
   },
   "urls": {
     "site": "https://atomfrede.github.io/shiny-adventure",
     "hubpress": "https://atomfrede.github.io/shiny-adventure",
-    "theme": "//atomfrede.github.io/shiny-adventure/themes/ichi",
+    "theme": "//atomfrede.github.io/shiny-adventure/themes/uno-zen",
     "images": "https://atomfrede.github.io/shiny-adventure/images"
   },
   "initialisationConfigComponent": {
