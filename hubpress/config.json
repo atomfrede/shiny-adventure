@@ -28,12 +28,12 @@
     "stackoverflow": ""
   },
   "theme": {
-    "name": "the-shell"
+    "name": "ichi"
   },
   "urls": {
     "site": "https://atomfrede.github.io/shiny-adventure",
     "hubpress": "https://atomfrede.github.io/shiny-adventure",
-    "theme": "//atomfrede.github.io/shiny-adventure/themes/casper",
+    "theme": "//atomfrede.github.io/shiny-adventure/themes/the-shell",
     "images": "https://atomfrede.github.io/shiny-adventure/images"
   },
   "initialisationConfigComponent": {
