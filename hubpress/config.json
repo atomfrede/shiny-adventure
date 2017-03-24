@@ -33,7 +33,17 @@
   "urls": {
     "site": "https://atomfrede.github.io/shiny-adventure",
     "hubpress": "https://atomfrede.github.io/shiny-adventure",
-    "theme": "//atomfrede.github.io/shiny-adventure/themes/ghostium",
+    "theme": "//atomfrede.github.io/shiny-adventure/themes/casper",
     "images": "https://atomfrede.github.io/shiny-adventure/images"
+  },
+  "initialisationConfigComponent": {
+    "name": "initialise-configuration",
+    "computed": {},
+    "methods": {},
+    "staticRenderFns": [
+      null,
+      null,
+      null
+    ]
   }
 }
