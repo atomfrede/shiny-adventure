@@ -28,12 +28,12 @@
     "stackoverflow": ""
   },
   "theme": {
-    "name": "ichi"
+    "name": "uno-zen"
   },
   "urls": {
     "site": "https://atomfrede.github.io/shiny-adventure",
     "hubpress": "https://atomfrede.github.io/shiny-adventure",
-    "theme": "//atomfrede.github.io/shiny-adventure/themes/the-shell",
+    "theme": "//atomfrede.github.io/shiny-adventure/themes/ichi",
     "images": "https://atomfrede.github.io/shiny-adventure/images"
   },
   "initialisationConfigComponent": {
