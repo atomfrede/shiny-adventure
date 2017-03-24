@@ -7,7 +7,7 @@
   },
   "site": {
     "title": "Shiny Adventures",
-    "description": "Of a former computer science student, now nerd and jhipster ",
+    "description": "of a passionate software developer, @java_hipster member, @jugpaderborn leader and father",
     "logo": "https://avatars2.githubusercontent.com/u/203401?v=3&s=460",
     "postsPerPage": "5",
     "cover": "https://pbs.twimg.com/profile_banners/103303375/1474916169/1500x500",
@@ -33,7 +33,7 @@
   "urls": {
     "site": "https://atomfrede.github.io/shiny-adventure",
     "hubpress": "https://atomfrede.github.io/shiny-adventure",
-    "theme": "//atomfrede.github.io/shiny-adventure/themes/uno-zen",
+    "theme": "//atomfrede.github.io/shiny-adventure/themes/uno",
     "images": "https://atomfrede.github.io/shiny-adventure/images"
   },
   "initialisationConfigComponent": {
