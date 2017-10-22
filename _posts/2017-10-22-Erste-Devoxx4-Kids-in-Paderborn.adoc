@@ -4,3 +4,5 @@
 // :published_at: 2019-01-31
 :hp-tags: devoxx4kids,devoxx
 // :hp-alt-title: My English Title
+Am 14. Oktober fand in den Räumen des Heinz-Nixdorf Instituts der universität der erste Devoxx4Kids Paderborn Workshop statt. 
+
