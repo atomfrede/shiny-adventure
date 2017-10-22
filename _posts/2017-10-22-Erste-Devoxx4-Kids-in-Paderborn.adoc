@@ -4,6 +4,7 @@
 // :published_at: 2019-01-31
 :hp-tags: devoxx4kids,devoxx
 // :hp-alt-title: My English Title
+
 Am 14. Oktober fand in den Räumen des Heinz-Nixdorf Instituts der universität der erste http://www.devoxx4kids.de/paderborn/[Devoxx4Kids Paderborn Workshop] statt. Morgens um 9 trafen sich X Mentoren und Y Kindern um gemeinsam verschiedene Bereiche der Informatik zu entdecken. Nach einem gemeinsamen Frühstück konnte der Tag beginnen.
 
 Das Mentorenteam aus Studenten, wiss. Mitarbeiten und freiwilligen aus der lokalen Wirtschaft konnten den Kindern einen Einblick in Spieleprogrammierung, Robotik und Elektronik bieten. Die Teilnehmer wurden in 3 Gruppen eingeteit und jede Gruppe machte jeden Workshop mit um das breite Feld der Informatik kennenzulernen. In der Mittagspause konnten sich alle erholen und sich mit mitgebrachtem Essen und bereitgestelltem Obst für das Gruppenfoto bei schönstem Wetter vor dem Springbrunnen des HNF stärken. 
