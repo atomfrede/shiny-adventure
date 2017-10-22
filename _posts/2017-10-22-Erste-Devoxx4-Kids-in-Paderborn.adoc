@@ -1,6 +1,6 @@
 = Erste Devoxx4Kids in Paderborn
 // See https://hubpress.gitbooks.io/hubpress-knowledgebase/content/ for information about the parameters.
-:hp-image: /images/devoxx4kids-17-01.jpg
+:hp-image: https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/devoxx4kids-17-01.jpg
 // :published_at: 2019-01-31
 :hp-tags: devoxx4kids,devoxx
 // :hp-alt-title: My English Title
