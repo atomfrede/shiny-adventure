@@ -13,5 +13,5 @@ Am Ende des Tages konnten sich die Eltern an den noch aufgebauten Workshopstatio
 
 image::https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/devoxx4kids-17-01-collage.jpg[]
 
-Das betreuende Mentoringteam aus Studierenden, wissenschaftlichen Universitätsangestellten und Freiwilligen aus der lokalen Wirtschaft bietet ihre Workshop-Tage zweimal jährlich an. Der nächste Termin mit neuen Inhalten findet am 03.02.2018 statt (Unkostenbeitrag 10 Euro). Informationen dazu finden Sie auf der Homepage: http://www.devoxx4kids.de/paderborn/. Wer sich anmelden oder das Devoxx4Kids-Team als Mentor/-in oder Sponsor/-in unterstützen möchte, kann sich an Melanie Margaritis unter melanie.margaritis@upb.de wenden. 
+Das betreuende Mentoringteam aus Studierenden, wissenschaftlichen Universitätsangestellten und Freiwilligen aus der lokalen Wirtschaft bietet ihre Workshop-Tage zweimal jährlich an. Der nächste Termin mit neuen Inhalten findet am 03.02.2018 statt (Teilnahmegebühr 10 Euro). Informationen dazu finden Sie auf der Homepage: http://www.devoxx4kids.de/paderborn/. Wer sich anmelden oder das Devoxx4Kids-Team als Mentor/-in oder Sponsor/-in unterstützen möchte, kann sich an Melanie Margaritis unter melanie.margaritis@upb.de wenden. 
 
