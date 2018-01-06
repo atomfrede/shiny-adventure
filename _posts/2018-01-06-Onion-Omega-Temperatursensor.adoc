@@ -4,5 +4,67 @@
 // :published_at: 2019-01-31
 :hp-tags: smarthome, openhab, onion, iot
 // :hp-alt-title: My English Title
-1. Hardware
-2. 
+
+== Hardware 
+
+Was muss man dafur machen?
+
+== Software
+
+Hier der Link: https://github.com/atomfrede/omega2-checkHumidity
+
+=== Php installieren
+
+https://docs.onion.io/omega2-docs/installing-and-using-php.html
+
+```bash
+opkg install php7 php7-cgi php7-cli php7-mod-json
+```
+
+Das script:
+
+```php
+<?php
+$result         = get_dht_values(19, "DHT22");  // change the pin number and DHT type accordingly
+$message        = $result[0];
+$temp           = $result[2];
+$humidity       = $result[1];
+
+if( $message == "success" ) {
+        // if successful, happy days let's spill the data out
+        $formatTemp = '%s Grad Celsius';
+        $formatHumidity = '%s%%';
+        $obj = new \stdClass();
+        $obj->temperature = $temp;
+        $obj->humidity = $humidity;
+        $obj->temperature_formatted = sprintf($formatTemp, $temp);
+        $obj->humidity_formatted = sprintf($formatHumidity, $humidity);
+        $json = json_encode($obj);
+        header('Content-Type: application/json');
+        echo $json;
+} else {
+        echo "Error: " .  $message;
+}
+
+function get_dht_values($pin, $dht_type) {
+
+        if( ( $dht_type != "DHT11" ) && ( $dht_type != "DHT22" )  ) {
+                return array("Invalid DHT Type", 0, 0);
+        }
+
+        // Run the command using the exec() function, delivers the output in $output
+        exec("/root/checkHumidity/checkHumidity $pin $dht_type  2>&1", $output, $return);
+
+        // -255 = bad
+        if( $output[0] == "-255.000000" ) {
+                return array("Unable to read sensor, check the wiring, pin number!", 0, 0);
+        }
+
+        // must be all good, lets return the data
+        $output[0]       =  number_format( (float)$output[0], 2, '.', '' );     // temp
+        $output[1]       =  number_format( (float)$output[1], 2, '.', '' );     // hum
+        return array( "success", $output[0], $output[1] );
+}
+?>
+
+```
