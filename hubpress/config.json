@@ -13,7 +13,8 @@
     "cover": "https://pbs.twimg.com/profile_banners/103303375/1474916169/1500x500",
     "delay": "",
     "googleAnalytics": "",
-    "disqus": ""
+    "disqus": "",
+    "blogPath": ""
   },
   "socialnetwork": {
     "email": "",
@@ -25,10 +26,12 @@
     "instagram": "",
     "pinterest": "",
     "flickr": "",
-    "stackoverflow": ""
+    "stackoverflow": "",
+    "paypalme": "",
+    "opencollective": ""
   },
   "theme": {
-    "name": "uno"
+    "name": "casper"
   },
   "urls": {
     "site": "https://atomfrede.github.io/shiny-adventure",
@@ -49,5 +52,6 @@
     "beforeCreate": [
       null
     ]
-  }
+  },
+  "navigation": []
 }
