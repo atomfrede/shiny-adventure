@@ -19,16 +19,16 @@
   "socialnetwork": {
     "email": "",
     "twitter": "https://twitter.com/atomfrede",
-    "googleplus": "https://plus.google.com/+FrederikHahne",
+    "googleplus": "",
     "linkedin": "http://de.linkedin.com/in/frederikhahne",
     "facebook": "https://www.facebook.com/frederik.hahne",
     "github": "https://github.com/atomfrede",
     "instagram": "",
     "pinterest": "",
     "flickr": "",
-    "stackoverflow": "",
+    "stackoverflow": "https://stackoverflow.com/users/2151471/atomfrede",
     "paypalme": "",
-    "opencollective": ""
+    "opencollective": "https://opencollective.com/atomfrede"
   },
   "theme": {
     "name": "casper"
@@ -36,7 +36,7 @@
   "urls": {
     "site": "https://atomfrede.github.io/shiny-adventure",
     "hubpress": "https://atomfrede.github.io/shiny-adventure",
-    "theme": "//atomfrede.github.io/shiny-adventure/themes/uno",
+    "theme": "//atomfrede.github.io/shiny-adventure/themes/casper",
     "images": "https://atomfrede.github.io/shiny-adventure/images"
   },
   "initialisationConfigComponent": {
