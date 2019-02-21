@@ -53,5 +53,10 @@
       null
     ]
   },
-  "navigation": []
+  "navigation": [
+    {
+      "label": "Test",
+      "url": "https://github.com/HubPress/hubpress.io/tree/gh-pages/themes/casper"
+    }
+  ]
 }
