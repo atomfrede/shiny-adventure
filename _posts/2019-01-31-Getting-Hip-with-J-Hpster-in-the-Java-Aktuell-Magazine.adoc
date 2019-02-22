@@ -1,6 +1,6 @@
 = Getting Hip with JHipster in the Java Aktuell Magazine 
 // See https://hubpress.gitbooks.io/hubpress-knowledgebase/content/ for information about the parameters.
-// :hp-image: /covers/cover.png
+:hp-image: https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/JHipster%20bowtie%20-%20square.png
 :published_at: 2019-01-31
 :hp-tags: Blog, jhipster, publications
 // :hp-alt-title: My English Title
