@@ -8,7 +8,7 @@
   "site": {
     "title": "Shiny Adventures",
     "description": "of a passionate software developer, @java_hipster board member, @jugpaderborn leader and father",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/pattern-jhipst.png",
     "postsPerPage": "5",
     "cover": "https://raw.githubusercontent.com/atomfrede/shiny-adventure/gh-pages/images/pattern-jhipst.png",
     "delay": "",
