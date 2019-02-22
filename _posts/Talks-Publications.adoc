@@ -5,10 +5,10 @@
 
 == Publications
 
-* Getting Hip with JHipster, Java Aktuell 2/2019, https://drive.google.com/open?id=0B8Fx6miC-TARdXFJWl9MSVhWNlJiZTViRFFSa3M2YWJOY3dv[PDF]
+* Getting Hip with JHipster, Java Aktuell 2/2019, https://drive.google.com/open?id=0B8Fx6miC-TARdXFJWl9MSVhWNlJiZTViRFFSa3M2YWJOY3dv[PDF^]
 
 == Talks
 
-* 2019/02/13 https://slides.com/atomfrede/gaining-confidence#/[Gaining Confidence] at https://www.meetup.com/Java-User-Group-Bielefeld/events/258666379/[JUG Bielefeld]
-* 2018/11/14 https://slides.com/atomfrede/getting-hip-with-java-hipster-15#/[Getting Hip with Java Hipster] at https://www.meetup.com/Java-User-Group-Bielefeld/events/255929042/[JUG Bielefeld]
-* 2018/09/20 https://slides.com/atomfrede/getting-hip-with-java-hipster#/[Getting Hip with Java Hipster] at https://jug-pb.gitlab.io/index.html[JUG Paderborn]
+* 2019/02/13 https://slides.com/atomfrede/gaining-confidence#/[Gaining Confidence^] at https://www.meetup.com/Java-User-Group-Bielefeld/events/258666379/[JUG Bielefeld^]
+* 2018/11/14 https://slides.com/atomfrede/getting-hip-with-java-hipster-15#/[Getting Hip with Java Hipster^] at https://www.meetup.com/Java-User-Group-Bielefeld/events/255929042/[JUG Bielefeld^]
+* 2018/09/20 https://slides.com/atomfrede/getting-hip-with-java-hipster#/[Getting Hip with Java Hipster^] at https://jug-pb.gitlab.io/index.html[JUG Paderborn^]
