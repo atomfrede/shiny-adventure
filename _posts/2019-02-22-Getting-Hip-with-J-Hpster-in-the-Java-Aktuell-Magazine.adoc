@@ -5,7 +5,7 @@
 :hp-tags: Blog, jhipster, publications
 // :hp-alt-title: My English Title
 
-My very first article was published in the german https://www.ijug.eu/de/java-aktuell/[Java Aktuell] 2/2019. Thanks to out scrummaster https://twitter.com/0x4d4175[Marcus] who had the great idea to tell a story. The result is a story about the scrummaster Samu and the jhipster contributor Jennifer. 
+My very first article was published in the german https://www.ijug.eu/de/java-aktuell/[Java Aktuell] 2/2019. Thanks to our scrummaster https://twitter.com/0x4d4175[Marcus] who had the great idea to tell a story instead of just writing a technical introduction. The result is a story about the scrummaster Samu and the jhipster contributor Jennifer. 
 
 If you can read German, you can https://drive.google.com/open?id=0B8Fx6miC-TARdXFJWl9MSVhWNlJiZTViRFFSa3M2YWJOY3dv[download and read the article as PDF for free]. 
 
