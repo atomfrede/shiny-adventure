@@ -5,7 +5,7 @@
 
 == Publications
 
-* Text here
+* Getting Hip with JHipster, Java Aktuell 2/2019, https://drive.google.com/open?id=0B8Fx6miC-TARdXFJWl9MSVhWNlJiZTViRFFSa3M2YWJOY3dv[PDF]
 
 == Talks
 
